@@ -2,6 +2,19 @@
 
 开发环境：基于 STM32H750_ArtPi +对应的多媒体板。
 
+移植内容：
+
+- [x] ThreadX
+- [x] letter-shell + ThreadX 线程管理
+
+![image-20230703143703702](figures/image-20230703143703702.png)
+
+- [x] MultiButton
+- [x] SEGGER_HardFault
+- [x] EventRecorder
+- [x] 基于 CMSIS RTX5 的原子操作函数
+- [ ] ILI9488 + ToughGFX
+
 # 开发问题记录
 
 ## 1 EventRecorder无法正确指向对应的RTE_Components.h
