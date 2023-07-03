@@ -78,9 +78,9 @@ static void vtor_config(void)
 
 static void dwt_init(void)
 {
-	DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
-	DWT->CYCCNT = (uint32_t)0u;
-	CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
+    DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
+    DWT->CYCCNT = (uint32_t)0u;
+    CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
 }
 /* USER CODE END 0 */
 
@@ -92,6 +92,7 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
     vtor_config();
+    dwt_init();
   /* USER CODE END 1 */
 
   /* Enable I-Cache---------------------------------------------------------*/
@@ -209,7 +210,7 @@ void SystemClock_Config(void)
 #ifndef EventRecorder_ENABLE
 #ifndef __MICROLIB 			// BEAB BKPT 0xAB
 __asm (".global __use_no_semihosting\n\t");
-void _sys_exit(int x) //避免使用半主机模式
+void _sys_exit(int x) 		//避免使用半主机模式
 {
     x = x;
 }

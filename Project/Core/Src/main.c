@@ -63,7 +63,7 @@ static void vtor_config(void)
 {
     /* 1.Rebase Vector */
     SCB->VTOR = QSPI_BASE;
-	
+
     /* 2.Clear all NVIC Enable and Pending registers */
     for(uint8_t i = 0; i < 8; i++)
     {
@@ -92,7 +92,7 @@ int main(void)
 {
     /* USER CODE BEGIN 1 */
     vtor_config();
-	dwt_init();
+    dwt_init();
     /* USER CODE END 1 */
 
     /* Enable I-Cache---------------------------------------------------------*/
@@ -210,7 +210,7 @@ void SystemClock_Config(void)
 #ifndef EventRecorder_ENABLE
 #ifndef __MICROLIB 			// BEAB BKPT 0xAB
 __asm (".global __use_no_semihosting\n\t");
-void _sys_exit(int x) //避免使用半主机模式
+void _sys_exit(int x) 		//避免使用半主机模式
 {
     x = x;
 }
@@ -235,7 +235,6 @@ PUTCHAR_PROTOTYPE
     HAL_UART_Transmit(&huart4, (uint8_t *)&ch, 1, 1000);
     return ch;
 }
-
 #endif
 
 /* USER CODE END 4 */

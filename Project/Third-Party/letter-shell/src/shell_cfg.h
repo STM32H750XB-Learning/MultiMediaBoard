@@ -48,7 +48,7 @@
 /**
  * @brief 支持shell尾行模式
  */
-#define     SHELL_SUPPORT_END_LINE      0
+#define     SHELL_SUPPORT_END_LINE      1
 #endif /** SHELL_SUPPORT_END_LINE */
 
 #ifndef SHELL_HELP_LIST_USER

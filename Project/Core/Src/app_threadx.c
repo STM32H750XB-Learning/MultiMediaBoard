@@ -58,35 +58,35 @@ TX_SEMAPHORE spi_tx_semaphore;
   */
 UINT App_ThreadX_Init(VOID *memory_ptr)
 {
-    UINT ret = TX_SUCCESS;
+  UINT ret = TX_SUCCESS;
 
-    /* USER CODE BEGIN App_ThreadX_Init */
+  /* USER CODE BEGIN App_ThreadX_Init */
     /* Create stack check.  */
     tx_thread_stack_error_notify(stack_error_handler);
 
     /* Create spi tx.  */
     tx_semaphore_create(&spi_tx_semaphore, "spi tx sem", 0);
-    /* USER CODE END App_ThreadX_Init */
+  /* USER CODE END App_ThreadX_Init */
 
-    return ret;
+  return ret;
 }
 
-/**
-* @brief  Function that implements the kernel's initialization.
-* @param  None
-* @retval None
-*/
+  /**
+  * @brief  Function that implements the kernel's initialization.
+  * @param  None
+  * @retval None
+  */
 void MX_ThreadX_Init(void)
 {
-    /* USER CODE BEGIN  Before_Kernel_Start */
+  /* USER CODE BEGIN  Before_Kernel_Start */
 
-    /* USER CODE END  Before_Kernel_Start */
+  /* USER CODE END  Before_Kernel_Start */
 
-    tx_kernel_enter();
+  tx_kernel_enter();
 
-    /* USER CODE BEGIN  Kernel_Start_Error */
+  /* USER CODE BEGIN  Kernel_Start_Error */
 
-    /* USER CODE END  Kernel_Start_Error */
+  /* USER CODE END  Kernel_Start_Error */
 }
 
 /* USER CODE BEGIN 1 */
