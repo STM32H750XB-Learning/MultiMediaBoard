@@ -30,7 +30,8 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <stdio.h>
+#include "main.h"
+#include "tx_execution_profile.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -45,7 +46,7 @@ extern "C" {
 
 /* Private defines -----------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define TX_NAME_MAX		18
+#define TX_NAME_MAX		20
 /* USER CODE END PD */
 
 /* Main thread defines -------------------------------------------------------*/

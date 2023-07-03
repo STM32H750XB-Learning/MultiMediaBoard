@@ -2,7 +2,6 @@
 #include "app_threadx.h"
 
 /* Private includes ----------------------------------------------------------*/
-#include "main.h"
 #include "shell.h"
 #include "usart.h"
 
@@ -113,12 +112,12 @@ static void ps(void)
     object_split(maxlen, "=");
     tx_kprintf("==============================================================================\r\n");
     tx_kprintf("cpu usage = %5.2f%%\r\n", cpu_usage);
-    tx_kprintf("task execution time = %.9fs\r\n", (double)_tx_execution_thread_time_total / SystemCoreClock);
-    tx_kprintf("idle execution time = %.9fs\r\n", (double)_tx_execution_idle_time_total / SystemCoreClock);
-    tx_kprintf("isr execution time = %.9fs\r\n", (double)_tx_execution_isr_time_total / SystemCoreClock);
-    tx_kprintf("total execution time = %.9fs\r\n", (double)(_tx_execution_thread_time_total + \
-               _tx_execution_idle_time_total + \
-               _tx_execution_isr_time_total) / SystemCoreClock);
+    tx_kprintf("task  exec time	= %.9fs\r\n", (double)_tx_execution_thread_time_total / SystemCoreClock);
+    tx_kprintf("idle  exec time	= %.9fs\r\n", (double)_tx_execution_idle_time_total / SystemCoreClock);
+    tx_kprintf("isr   exec time	= %.9fs\r\n", (double)_tx_execution_isr_time_total / SystemCoreClock);
+    tx_kprintf("total exec time = %.9fs\r\n", (double)(_tx_execution_thread_time_total + \
+													   _tx_execution_idle_time_total + \
+													   _tx_execution_isr_time_total) / SystemCoreClock);
 
     /* Print Title */
     object_split(maxlen, "=");
@@ -218,6 +217,7 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 {
     if(huart == &huart4)
     {
+        shell_rx.pos = 0;
         shell_rx.size = SHELL_BUF_MAX_SIZE - __HAL_DMA_GET_COUNTER(&hdma_uart4_rx);
         if(shell_rx.is_buf == false)
         {

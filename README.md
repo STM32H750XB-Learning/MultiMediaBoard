@@ -13,6 +13,7 @@
 - [x] SEGGER_HardFault
 - [x] EventRecorder
 - [x] 基于 CMSIS RTX5 的原子操作函数
+- [x] perf_counter
 - [ ] ILI9488 + ToughGFX
 
 # 开发问题记录

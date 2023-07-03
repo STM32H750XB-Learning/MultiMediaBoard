@@ -28,6 +28,7 @@
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
 #include "EventRecorder.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -123,6 +124,8 @@ int main(void)
     MX_SPI2_Init();
     MX_UART4_Init();
     /* USER CODE BEGIN 2 */
+	SystemCoreClockUpdate();
+	init_cycle_counter(true);
 #ifdef EventRecorder_ENABLE
     EventRecorderInitialize(EventRecordAll, 1U);
     EventRecorderStart();

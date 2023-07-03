@@ -34,6 +34,7 @@ extern "C" {
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdbool.h> 
+#include "perf_counter.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

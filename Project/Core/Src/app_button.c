@@ -2,7 +2,6 @@
 #include "app_threadx.h"
 
 /* Private includes ----------------------------------------------------------*/
-#include "main.h"
 #include "multi_button.h"
 
 
