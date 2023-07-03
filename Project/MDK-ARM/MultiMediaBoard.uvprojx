@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>TX_INCLUDE_USER_DEFINE_FILE,USE_HAL_DRIVER,STM32H750xx,TX_EXECUTION_PROFILE_ENABLE,TX_CORTEX_M_EPK,TX_PORT_USE_BASEPRI,TX_PORT_BASEPRI=0</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../AZURE_RTOS/App;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../Middlewares/ST/threadx/common/inc/;../Middlewares/ST/threadx/ports/cortex_m7/ac6/inc/;../Third-Party/letter-shell/src;../Third-Party/MultiButton;../Third-Party/tx_execution_profile;../Third-Party;..\Third-Party\perf_counter</IncludePath>
+              <IncludePath>../Core/Inc;../AZURE_RTOS/App;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../Middlewares/ST/threadx/common/inc/;../Middlewares/ST/threadx/ports/cortex_m7/ac6/inc/;../Third-Party/letter-shell/src;../Third-Party/MultiButton;../Third-Party/tx_execution_profile;../Third-Party;..\Third-Party\perf_counter;..\Third-Party\ili9488</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -648,6 +648,11 @@
               <FileName>systick_wrapper_ual.s</FileName>
               <FileType>2</FileType>
               <FilePath>..\Third-Party\perf_counter\systick_wrapper_ual.s</FilePath>
+            </File>
+            <File>
+              <FileName>ili9488.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Third-Party\ili9488\ili9488.c</FilePath>
             </File>
           </Files>
         </Group>

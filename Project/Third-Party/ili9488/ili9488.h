@@ -8,13 +8,14 @@
   */
 #ifndef ILI9488_H__
 #define ILI9488_H__
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 #include "main.h"
 #include "spi.h"
 #include "app_threadx.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /* Private define ------------------------------------------------------------*/
 /* ILI9488 Command */

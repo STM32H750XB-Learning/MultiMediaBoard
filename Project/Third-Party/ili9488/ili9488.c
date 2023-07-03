@@ -1,7 +1,6 @@
 /* Includes ------------------------------------------------------------------*/
-#include "ili9488.h"
-#include <stdio.h>
 #include "app_azure_rtos.h"
+#include "ili9488.h"
 #include "spi.h"
 
 /* Private define ------------------------------------------------------------*/
@@ -16,7 +15,7 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-extern TX_SEMAPHORE tx_app_semaphore;
+extern TX_SEMAPHORE spi_tx_semaphore;
 static uint32_t BACK_COLOR = ILI9488_POINT_COLOR_WHITE, FORE_COLOR = ILI9488_POINT_COLOR_BLACK;
 __attribute__((section(".RAM_SDRAM"))) static uint8_t ili9488_buf[ILI9488_BUF_SIZE] = {0};
 /* Private user code ---------------------------------------------------------*/
@@ -47,7 +46,7 @@ static uint32_t ili9488_send_data_dma(const void *data, size_t length)
         send_buf = (uint8_t *)data + already_send_length;
 
         state = HAL_SPI_Transmit_DMA(&hspi2, (uint8_t *)data, send_length);
-        tx_semaphore_get(&tx_app_semaphore, TX_WAIT_FOREVER);
+        tx_semaphore_get(&spi_tx_semaphore, TX_WAIT_FOREVER);
         if(state != HAL_OK)	return already_send_length;
     }
 
@@ -94,7 +93,7 @@ static HAL_StatusTypeDef ili9488_read_byets(uint8_t *buf, size_t size)
 /* Exported functions ---------------------------------------------------------*/
 void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
 {
-    if(hspi == &hspi2)	tx_semaphore_put(&tx_app_semaphore);
+    if(hspi == &hspi2)	tx_semaphore_put(&spi_tx_semaphore);
 }
 
 void ili9488_init(void)

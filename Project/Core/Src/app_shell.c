@@ -40,9 +40,6 @@ shell_rx_t shell_rx =
     .pos = 0,
     .is_buf = false,
 };
-
-extern volatile double cpu_usage;
-extern DMA_HandleTypeDef hdma_uart4_rx;
 /* Private function prototypes -----------------------------------------------*/
 static void shell_task(ULONG thread_input);
 static signed short shellRead(char *data, unsigned short len);

@@ -1,4 +1,10 @@
 //  ==== Copy From rtx_core_cm.h ====
+#ifndef ATOMIC_H__
+#define ATOMIC_H__
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 //  ==== Exclusive Access Operation ====
 
@@ -757,3 +763,8 @@ __STATIC_INLINE void atomic_link_put (void **root, void *link) {
 //lint --flb "Library End" [MISRA Note 12]
 
 //#endif  // (EXCLUSIVE_ACCESS == 1)
+#ifdef __cplusplus
+}
+#endif
+
+#endif

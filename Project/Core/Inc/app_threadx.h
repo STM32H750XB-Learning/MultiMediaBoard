@@ -79,6 +79,7 @@ void stack_error_handler(TX_THREAD *thread_ptr);
 extern EXECUTION_TIME     _tx_execution_thread_time_total;
 extern EXECUTION_TIME     _tx_execution_isr_time_total;
 extern EXECUTION_TIME     _tx_execution_idle_time_total;
+extern volatile double cpu_usage;
 /* USER CODE END 1 */
 
 #ifdef __cplusplus

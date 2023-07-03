@@ -46,6 +46,7 @@
 ".\multimediaboard\objects\perf_counter.o"
 ".\multimediaboard\objects\perf_os_patch_threadx.o"
 ".\multimediaboard\objects\systick_wrapper_ual.o"
+".\multimediaboard\objects\ili9488.o"
 ".\multimediaboard\objects\tx_thread_context_restore.o"
 ".\multimediaboard\objects\tx_thread_context_save.o"
 ".\multimediaboard\objects\tx_thread_interrupt_control.o"
