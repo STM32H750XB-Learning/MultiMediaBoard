@@ -19,6 +19,7 @@
 static uint32_t BACK_COLOR = ILI9488_POINT_COLOR_WHITE, FORE_COLOR = ILI9488_POINT_COLOR_BLACK;
 __attribute__((section(".RAM_SDRAM"))) static uint8_t ili9488_buf[ILI9488_BUF_SIZE] = {0};
 
+extern TX_SEMAPHORE spi_tx_semaphore;
 /* Private user code ---------------------------------------------------------*/
 static uint32_t ili9488_send_data_dma(const void *data, size_t length)
 {

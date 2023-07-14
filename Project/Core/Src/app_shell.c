@@ -4,6 +4,12 @@
 /* Private includes ----------------------------------------------------------*/
 #include "shell.h"
 #include "usart.h"
+#include "tx_mutex.h"
+/* extern variables ----------------------------------------------------------*/
+extern TX_THREAD  		*_tx_thread_created_ptr;
+extern ULONG   			_tx_thread_created_count;
+extern TX_SEMAPHORE *  	_tx_semaphore_created_ptr;
+extern ULONG            _tx_semaphore_created_count;
 
 /* Private define ------------------------------------------------------------*/
 #define SHELL_THREAD_STACK_SIZE 	4096
@@ -99,9 +105,8 @@ static int unlock(Shell *shell)
   */
 static void ps(void)
 {
-    TX_THREAD      *thread = &shell_thread;
+    TX_THREAD      *thread = _tx_thread_created_ptr;
     UCHAR stat;
-    uint8_t *ptr;
     uint8_t maxlen = TX_NAME_MAX;
 
     /* Print Sysinfo */
@@ -124,7 +129,7 @@ static void ps(void)
     tx_kprintf(" ---  --------- ---------- ----------  --------  --------  ---------- ---\r\n");
 
     /* Traversing Thread Control List */
-    while (thread != (TX_THREAD *)0)
+	for(int i = 0; i < _tx_thread_created_count; i++)
     {
         tx_kprintf("%-*.*s %3d ", maxlen, maxlen, thread->tx_thread_name, thread->tx_thread_priority);
 
@@ -134,26 +139,96 @@ static void ps(void)
         else if(stat == TX_TERMINATED)		tx_kprintf(" terminate");
         else if(stat == TX_SUSPENDED)		tx_kprintf(" suspend  ");
         else if(stat == TX_SLEEP)			tx_kprintf(" sleep    ");
-
-        ptr = (uint8_t *)thread->tx_thread_stack_start;
-        while(*ptr == 0xEF) ++ptr;			// ThreadX Fill Stack With 0xEF
-
+		
+		/* It should be noted that tx_thread_stack_highest_ptr won't 
+		 * update imediately, so sometimes we should call ps again to
+		 * update tx_thread_stack_highest_ptr.
+		 */
         tx_kprintf(" 0x%08x   %8d       %02d%%       %02d%%",
                    (ULONG)thread->tx_thread_stack_ptr,
                    thread->tx_thread_stack_size,
                    ((ULONG)thread->tx_thread_stack_end - (ULONG)thread->tx_thread_stack_ptr) * 100 / thread->tx_thread_stack_size,
-                   ((ULONG)thread->tx_thread_stack_end - (ULONG)ptr) * 100 / thread->tx_thread_stack_size);
+                   ((ULONG)thread->tx_thread_stack_end - (ULONG)thread->tx_thread_stack_highest_ptr) * 100 / thread->tx_thread_stack_size);
         if(thread->tx_thread_time_slice == 0)	tx_kprintf("  Preemptive");
         else	tx_kprintf("  0x%08x", thread->tx_thread_time_slice);
         tx_kprintf(" %03d\r\n", 000);
 
         thread = thread->tx_thread_created_next;
-        if(thread == &shell_thread) break;
     }
 }
 SHELL_EXPORT_CMD(
     SHELL_CMD_PERMISSION(0) | SHELL_CMD_TYPE(SHELL_TYPE_CMD_FUNC) | SHELL_CMD_DISABLE_RETURN,
     ps, ps, list all thread);
+
+/**
+  * @brief  list sem info
+  * @param  None
+  * @retval None
+  */
+static void list_sem(void)
+{
+	TX_SEMAPHORE *sem = _tx_semaphore_created_ptr;
+	uint8_t maxlen = TX_NAME_MAX;
+	
+	tx_kprintf("\r\n");
+	tx_kprintf("%-*s v   suspend thread\r\n", maxlen, "semaphore");
+    object_split(maxlen, "=");
+    tx_kprintf(" === ==============\r\n");
+
+	for(int i = 0; i < _tx_semaphore_created_count; i++)
+	{
+		tx_kprintf("%-*s %-3d ", maxlen, sem->tx_semaphore_name, sem->tx_semaphore_count);
+		
+		if(sem->tx_semaphore_suspended_count == 0)
+			tx_kprintf("%d", sem->tx_semaphore_suspended_count);
+		else
+			tx_kprintf("%d: ", sem->tx_semaphore_suspended_count);
+		
+		for(int j = 0; j < sem->tx_semaphore_suspended_count; j++)
+		{
+			tx_kprintf("%.*s", maxlen, sem->tx_semaphore_suspension_list->tx_thread_name);
+			if(j != sem->tx_semaphore_suspended_count)	tx_kprintf("/");
+		}
+		tx_kprintf("\r\n");
+		
+		sem = sem->tx_semaphore_created_next;
+	}
+}
+SHELL_EXPORT_CMD(
+    SHELL_CMD_PERMISSION(0) | SHELL_CMD_TYPE(SHELL_TYPE_CMD_FUNC) | SHELL_CMD_DISABLE_RETURN,
+    list_sem, list_sem, list all sem);
+
+/**
+  * @brief  list mutex info
+  * @param  None
+  * @retval None
+  */
+static void list_mutex(void)
+{
+	TX_MUTEX *mutex = _tx_mutex_created_ptr;
+	uint8_t maxlen = TX_NAME_MAX;
+
+	tx_kprintf("\r\n");
+	tx_kprintf("%-*s   owner  hold suspend thread\r\n", maxlen, "mutex");
+    object_split(maxlen, "=");
+    tx_kprintf(" ======== ==== ==============\r\n");
+
+	for(int i = 0; i < _tx_mutex_created_count; i++)
+	{		
+		tx_kprintf("%-*.*s %-8.*s %04d %d\r\n",
+				   maxlen, TX_NAME_MAX,
+				   mutex->tx_mutex_name,
+				   TX_NAME_MAX,
+				   mutex->tx_mutex_owner->tx_thread_name,
+				   mutex->tx_mutex_ownership_count,
+				   mutex->tx_mutex_suspended_count);
+
+		mutex = mutex->tx_mutex_created_next;
+	}
+}
+SHELL_EXPORT_CMD(
+    SHELL_CMD_PERMISSION(0) | SHELL_CMD_TYPE(SHELL_TYPE_CMD_FUNC) | SHELL_CMD_DISABLE_RETURN,
+    list_mutex, list_mutex, list all mutex);
 
 UINT shell_thread_init(VOID)
 {

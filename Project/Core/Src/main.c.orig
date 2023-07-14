@@ -28,6 +28,7 @@
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
 #include "EventRecorder.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -123,10 +124,13 @@ int main(void)
   MX_SPI2_Init();
   MX_UART4_Init();
   /* USER CODE BEGIN 2 */
+    SystemCoreClockUpdate();
+    init_cycle_counter(true);
 #ifdef EventRecorder_ENABLE
     EventRecorderInitialize(EventRecordAll, 1U);
     EventRecorderStart();
 #endif
+
   /* USER CODE END 2 */
 
   MX_ThreadX_Init();
@@ -235,7 +239,6 @@ PUTCHAR_PROTOTYPE
     HAL_UART_Transmit(&huart4, (uint8_t *)&ch, 1, 1000);
     return ch;
 }
-
 #endif
 
 /* USER CODE END 4 */

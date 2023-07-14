@@ -4,7 +4,6 @@
 /* Private includes ----------------------------------------------------------*/
 #include "multi_button.h"
 
-
 /* Private define ------------------------------------------------------------*/
 #define BUTTON_THREAD_STACK_SIZE 	1024
 #define BUTTON_THREAD_PRIO       	10
@@ -30,7 +29,7 @@ static void button_thread_entry(ULONG thread_input)
     {
         button_ticks();
         tx_thread_sleep(TICKS_INTERVAL);			// 留给低优先级线程运行的机会
-    }
+	}
 }
 
 static uint8_t key_usr_read(uint8_t paras)

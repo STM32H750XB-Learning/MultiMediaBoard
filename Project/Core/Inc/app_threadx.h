@@ -72,6 +72,7 @@ static inline void object_split(int len, char *ch)
 UINT shell_thread_init(VOID);
 UINT button_thread_init(VOID);
 UINT sys_stat_thread_init(void);
+UINT lcd_thread_init(VOID);
 void stack_error_handler(TX_THREAD *thread_ptr);
 /* USER CODE END EFP */
 
@@ -81,6 +82,8 @@ extern EXECUTION_TIME 	_tx_execution_isr_time_total;
 extern EXECUTION_TIME	_tx_execution_idle_time_total;
 extern volatile double 	cpu_usage;
 extern TX_SEMAPHORE spi_tx_semaphore;
+
+
 /* USER CODE END 1 */
 
 #ifdef __cplusplus

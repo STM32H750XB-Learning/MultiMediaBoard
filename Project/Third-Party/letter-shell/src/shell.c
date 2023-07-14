@@ -80,21 +80,20 @@ enum
 #endif
 };
 
-
 static const char *shellText[] =
 {
 #if SHELL_SHOW_INFO == 1
     [SHELL_TEXT_INFO] =
         "\r\n"
-        " _         _   _                  _          _ _ \r\n"
-        "| |    ___| |_| |_ ___ _ __   ___| |__   ___| | |\r\n"
-        "| |   / _ \\ __| __/ _ \\ '__| / __| '_ \\ / _ \\ | |\r\n"
-        "| |__|  __/ |_| ||  __/ |    \\__ \\ | | |  __/ | |\r\n"
-        "|_____\\___|\\__|\\__\\___|_|    |___/_| |_|\\___|_|_|\r\n"
+		"  _____ _                        ___  __\r\n"
+		" |_   _| |__  _ __ ___  __ _  __| \\ \\/ /\r\n"
+		"   | | | '_ \\| '__/ _ \\/ _` |/ _` |\\  / \r\n"
+		"   | | | | | | | |  __/ (_| | (_| |/  \\ \r\n"
+		"   |_| |_| |_|_|  \\___|\\__,_|\\__,_/_/\\_\\\r\n"
         "\r\n"
         "Build:       "__DATE__" "__TIME__"\r\n"
-        "Version:     "SHELL_VERSION"\r\n"
-        "Copyright:   (c) 2020 Letter\r\n",
+        "Version:     6.2.0\r\n",
+		
 #endif
     [SHELL_TEXT_CMD_TOO_LONG] = 
         "\r\nWarning: Command is too long\r\n",

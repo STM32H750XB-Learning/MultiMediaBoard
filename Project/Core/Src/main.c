@@ -83,6 +83,7 @@ static void dwt_init(void)
     DWT->CYCCNT = (uint32_t)0u;
     CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
 }
+__attribute__((section(".RAM_SDRAM"))) uint8_t test[256];
 /* USER CODE END 0 */
 
 /**
@@ -124,8 +125,8 @@ int main(void)
     MX_SPI2_Init();
     MX_UART4_Init();
     /* USER CODE BEGIN 2 */
-	SystemCoreClockUpdate();
-	init_cycle_counter(true);
+    SystemCoreClockUpdate();
+    init_cycle_counter(true);
 #ifdef EventRecorder_ENABLE
     EventRecorderInitialize(EventRecordAll, 1U);
     EventRecorderStart();

@@ -14,7 +14,8 @@
 - [x] EventRecorder
 - [x] 基于 CMSIS RTX5 的原子操作函数
 - [x] perf_counter
-- [ ] ILI9488 + ToughGFX
+- [ ] ILI9488 + ToughGFX：这屏幕有点玄学了，先转去玩我的 CherryUSB
+- [ ] CherryUSB
 
 # 开发问题记录
 

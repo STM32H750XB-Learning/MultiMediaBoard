@@ -213,7 +213,7 @@
 /* Determine if mutex performance gathering is required by the application. When the following is
    defined, ThreadX gathers various mutex performance information. */
 
-/*#define TX_MUTEX_ENABLE_PERFORMANCE_INFO*/
+#define TX_MUTEX_ENABLE_PERFORMANCE_INFO
 
 /* Determine if queue performance gathering is required by the application. When the following is
    defined, ThreadX gathers various queue performance information. */
@@ -223,12 +223,12 @@
 /* Determine if semaphore performance gathering is required by the application. When the following is
    defined, ThreadX gathers various semaphore performance information. */
 
-/*#define TX_SEMAPHORE_ENABLE_PERFORMANCE_INFO*/
+#define TX_SEMAPHORE_ENABLE_PERFORMANCE_INFO
 
 /* Determine if thread performance gathering is required by the application. When the following is
    defined, ThreadX gathers various thread performance information. */
 
-/*#define TX_THREAD_ENABLE_PERFORMANCE_INFO*/
+#define TX_THREAD_ENABLE_PERFORMANCE_INFO
 
 /* Determine if timer performance gathering is required by the application. When the following is
    defined, ThreadX gathers various timer performance information. */
