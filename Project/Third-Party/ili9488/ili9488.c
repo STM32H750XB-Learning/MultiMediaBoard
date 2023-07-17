@@ -17,7 +17,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 static uint32_t BACK_COLOR = ILI9488_POINT_COLOR_WHITE, FORE_COLOR = ILI9488_POINT_COLOR_BLACK;
-__attribute__((section(".RAM_SDRAM"))) static uint8_t ili9488_buf[ILI9488_BUF_SIZE] = {0};
+__attribute__((section(".SDRAM"))) static uint8_t ili9488_buf[ILI9488_BUF_SIZE] = {0};
 
 extern TX_SEMAPHORE spi_tx_semaphore;
 /* Private user code ---------------------------------------------------------*/

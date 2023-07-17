@@ -17,7 +17,6 @@ static void button_thread_entry(ULONG thread_input);
 static uint8_t key_usr_read(uint8_t paras);
 static void cb_single_click(void *paras);
 
-
 /**
   * @brief  Function implementing the tx_app_thread_entry thread.
   * @param  thread_input: Hardcoded to 0.

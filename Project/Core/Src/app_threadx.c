@@ -66,6 +66,7 @@ UINT App_ThreadX_Init(VOID *memory_ptr)
 
     /* Create spi tx.  */
     tx_semaphore_create(&spi_tx_semaphore, "spi tx sem", 1);
+
     /* USER CODE END App_ThreadX_Init */
 
     return ret;

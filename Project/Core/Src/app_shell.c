@@ -62,7 +62,7 @@ static void shell_task(ULONG thread_input)
 static signed short shellRead(char *data, unsigned short len)
 {
     int is_buf = shell_rx.is_buf;
-
+	
     tx_semaphore_get(&shell_rx_sem, TX_WAIT_FOREVER);
 
     for(int i = 0; i < len; i++)

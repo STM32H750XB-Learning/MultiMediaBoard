@@ -23,7 +23,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "ili9488.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -65,10 +65,7 @@ UINT App_ThreadX_Init(VOID *memory_ptr)
     tx_thread_stack_error_notify(stack_error_handler);
 
     /* Create spi tx.  */
-    tx_semaphore_create(&spi_tx_semaphore, "spi tx sem", 0);
-	
-	ili9488_init();
-	ili9488_exit_sleep();
+    tx_semaphore_create(&spi_tx_semaphore, "spi tx sem", 1);
 	
   /* USER CODE END App_ThreadX_Init */
 
